@@ -7,15 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Azul Rey y Plata */
-            --royal-blue: #002366;
-            --silver-metal: linear-gradient(145deg, #bdc3c7, #95a5a6);
-            --silver-light: #e5e7eb;
-            --bg-platinum: #f1f3f5;
-            --card-white: #ffffff;
-            --text-dark: #0f172a;
-            --text-sub: #475569;
-            --accent-silver: #94a3b8;
+            --royal-blue: #002366; --silver-metal: #95a5a6;
+            --silver-light: #e5e7eb; --bg-platinum: #f1f3f5;
+            --card-white: #ffffff; --text-dark: #0f172a;
+            --text-sub: #475569; --accent-silver: #94a3b8;
         }
 
         body { 
@@ -23,82 +18,48 @@
             margin: 0; padding-top: env(safe-area-inset-top);
         }
 
-        /* HEADER ELEGANTE */
         header {
             background: var(--royal-blue); padding: 1.8rem 1.5rem; display: flex; 
             justify-content: space-between; align-items: center;
-            border-bottom: 3px solid var(--accent-silver);
-            color: white; border-radius: 0 0 30px 30px;
+            border-bottom: 3px solid var(--accent-silver); color: white; border-radius: 0 0 30px 30px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
         .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        #app-logo { 
-            width: 55px; height: 55px; border-radius: 16px; object-fit: cover; 
-            border: 2px solid var(--silver-light); background: white;
-        }
-        .time-display { font-weight: 600; color: var(--silver-light); font-size: 0.85rem; letter-spacing: 1px; }
+        #app-logo { width: 55px; height: 55px; border-radius: 16px; object-fit: cover; border: 2px solid var(--silver-light); background: white; }
+        .time-display { font-weight: 600; color: var(--silver-light); font-size: 0.85rem; }
 
-        /* STATS ELEGANTES */
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 1.5rem; margin-top: -20px; }
-        .stat-item { 
-            background: var(--card-white); padding: 18px 10px; border-radius: 24px; text-align: center; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border: 1px solid var(--silver-light);
-        }
+        .stat-item { background: var(--card-white); padding: 18px 10px; border-radius: 24px; text-align: center; border: 1px solid var(--silver-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .stat-item span { display: block; font-size: 0.65rem; font-weight: 800; color: var(--accent-silver); text-transform: uppercase; margin-bottom: 6px; }
         .stat-item b { font-size: 1.3rem; font-weight: 800; color: var(--royal-blue); }
 
-        /* LISTA Y TARJETAS */
         .container { padding: 0 1.5rem 100px; }
-        .search { 
-            width: 100%; padding: 18px; border-radius: 20px; border: 1px solid var(--silver-light); 
-            background: var(--card-white); margin-bottom: 25px; font-size: 1rem; 
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); outline: none;
-        }
+        .search { width: 100%; padding: 18px; border-radius: 20px; border: 1px solid var(--silver-light); background: var(--card-white); margin-bottom: 25px; font-size: 1rem; outline: none; box-sizing: border-box; }
         
         .animal-card { 
             background: var(--card-white); border-radius: 28px; padding: 22px; margin-bottom: 18px;
             display: flex; justify-content: space-between; align-items: center;
-            border-left: 6px solid var(--royal-blue);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04);
+            border-left: 6px solid var(--royal-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .status-pill { 
-            padding: 5px 14px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; 
-            background: var(--silver-light); color: var(--royal-blue); border: 1px solid var(--accent-silver);
-        }
-        .btn-informe { 
-            background: var(--royal-blue); color: white; border: none; padding: 14px; 
-            border-radius: 15px; font-weight: 700; margin-top: 18px; width: 100%;
-            letter-spacing: 0.5px; transition: 0.3s;
-        }
+        .status-pill { padding: 5px 14px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; background: var(--silver-light); color: var(--royal-blue); border: 1px solid var(--accent-silver); }
+        
+        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 14px; border-radius: 15px; font-weight: 700; margin-top: 15px; width: 100%; }
 
         /* MODALES */
-        .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: 3rem 1.5rem; overflow-y: auto; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; border-bottom: 2px solid var(--silver-light); padding-bottom: 15px; }
-        .input-group { margin-bottom: 22px; }
-        label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
-        input, select { 
-            width: 100%; padding: 18px; border-radius: 18px; border: 1px solid var(--silver-light); 
-            background: white; font-size: 1rem; font-family: inherit; color: var(--text-dark);
-        }
+        .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: 2.5rem 1.5rem; overflow-y: auto; box-sizing: border-box; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid var(--silver-light); padding-bottom: 15px; }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 8px; }
+        input, select { width: 100%; padding: 16px; border-radius: 18px; border: 1px solid var(--silver-light); background: white; font-size: 1rem; box-sizing: border-box; font-family: inherit; }
         
-        .btn-save { 
-            background: var(--royal-blue); color: white; width: 100%; padding: 22px; 
-            border-radius: 20px; border: none; font-weight: 800; font-size: 1.1rem;
-            box-shadow: 0 4px 14px rgba(0, 35, 102, 0.3);
-        }
-        .fab { 
-            position: fixed; bottom: 35px; right: 25px; width: 75px; height: 75px; 
-            background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light);
-            font-size: 35px; box-shadow: 0 15px 30px rgba(0,35,102,0.4); 
-        }
+        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(0, 35, 102, 0.3); }
+        .btn-update { background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 10px; }
+        .btn-delete { background: #fee2e2; color: #dc2626; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 20px; }
 
-        /* INFORME */
-        .growth-box { 
-            background: var(--card-white); border-radius: 25px; padding: 25px; 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0;
-            border: 1px solid var(--silver-light); box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-        .history-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid var(--silver-light); font-weight: 600; color: var(--text-sub); }
+        .fab { position: fixed; bottom: 35px; right: 25px; width: 75px; height: 75px; background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light); font-size: 35px; box-shadow: 0 15px 30px rgba(0,35,102,0.4); z-index: 80; }
+
+        .growth-box { background: var(--card-white); border-radius: 25px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; border: 1px solid var(--silver-light); }
+        .history-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.9rem; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -108,21 +69,21 @@
         <img id="app-logo" src="https://via.placeholder.com/100/002366/ffffff?text=F" alt="Logo">
         <input type="file" id="logoInput" hidden accept="image/*" onchange="changeLogo(event)">
         <div>
-            <div style="font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px;">Fenix Group</div>
-            <div style="font-size: 0.75rem; color: var(--silver-light); font-weight: 600; opacity: 0.9;">ELITE MANAGEMENT</div>
+            <div style="font-weight: 800; font-size: 1.3rem;">Fenix Group</div>
+            <div style="font-size: 0.75rem; color: var(--silver-light); font-weight: 600;">ELITE MANAGEMENT</div>
         </div>
     </div>
     <div class="time-display" id="clock">00:00 p.m.</div>
 </header>
 
 <div class="stats">
-    <div class="stat-item"><span>Animales</span><b id="k-total">0</b></div>
-    <div class="stat-item"><span>Peso Prom.</span><b id="k-avg">0</b></div>
-    <div class="stat-item"><span>Alertas</span><b id="k-crit" style="color:#d946ef">0</b></div>
+    <div class="stat-item"><span>Total</span><b id="k-total">0</b></div>
+    <div class="stat-item"><span>Media Kg</span><b id="k-avg">0</b></div>
+    <div class="stat-item"><span>Alertas</span><b id="k-crit" style="color:#ef4444">0</b></div>
 </div>
 
 <div class="container">
-    <input type="text" id="search" class="search" placeholder="🔍 Buscar por Identificador..." onkeyup="render()">
+    <input type="text" id="search" class="search" placeholder="🔍 Buscar por ID..." onkeyup="render()">
     <div id="animal-list"></div>
 </div>
 
@@ -130,59 +91,89 @@
 
 <div id="modal-reg" class="modal">
     <div class="modal-header">
-        <h2 style="margin:0; font-weight:800; font-size:1.8rem; color: var(--royal-blue);">Nuevo Registro</h2>
+        <h2 id="modal-reg-title" style="margin:0; font-weight:800; color: var(--royal-blue);">Nuevo Registro</h2>
         <span onclick="closeModal('modal-reg')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">X</span>
     </div>
-    <div class="input-group"><label>IDENTIFICADOR DEL ANIMAL</label><input type="text" id="p_id" placeholder="Ej: Elite-01"></div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-        <div class="input-group"><label>GÉNERO</label><select id="p_gender"><option>Macho</option><option>Hembra</option></select></div>
-        <div class="input-group"><label>FECHA REGISTRO</label><input type="date" id="p_date"></div>
-    </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-        <div class="input-group"><label>PESO ACTUAL (KG)</label><input type="number" id="p_weight" placeholder="0.0"></div>
+    <input type="hidden" id="edit-id-original">
+    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id"></div>
+    <div class="input-group"><label>GÉNERO</label><select id="p_gender"><option>Macho</option><option>Hembra</option></select></div>
+    <div id="reg-extra-fields">
+        <div class="input-group"><label>PESO INICIAL (KG)</label><input type="number" id="p_weight"></div>
         <div class="input-group"><label>ESTADO SALUD</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
     </div>
-    <button class="btn-save" onclick="saveData()">CONFIRMAR REGISTRO</button>
+    <button class="btn-save" id="btn-save-main" onclick="saveData()">CONFIRMAR</button>
+    <button class="btn-delete" id="btn-del-animal" style="display:none;" onclick="deleteAnimal()">ELIMINAR ANIMAL</button>
 </div>
 
 <div id="modal-info" class="modal">
     <div class="modal-header">
-        <h2 id="info-title" style="margin:0; font-weight:800; font-size:1.8rem; color: var(--royal-blue);">--</h2>
+        <h2 id="info-title" style="margin:0; font-weight:800; color: var(--royal-blue);">--</h2>
         <span onclick="closeModal('modal-info')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
     </div>
+    
     <div class="growth-box">
-        <div><small style="color:var(--accent-silver); font-weight:800; font-size:0.6rem; text-transform:uppercase;">Crecimiento</small><div style="font-weight:800; color:var(--royal-blue); font-size:1.2rem;" id="info-daily">0.00 kg/d</div></div>
-        <div><small style="color:var(--accent-silver); font-weight:800; font-size:0.6rem; text-transform:uppercase;">Ganancia Total</small><div style="font-weight:800; color:var(--text-dark); font-size:1.2rem;" id="info-net">+0.00 kg</div></div>
+        <div><small>CRECIMIENTO DIARIO</small><div style="font-weight:800; color:var(--royal-blue);" id="info-daily">0.00 kg/d</div></div>
+        <div><small>GANANCIA TOTAL</small><div style="font-weight:800;" id="info-net">+0.00 kg</div></div>
     </div>
-    <div id="history-list" style="padding-bottom: 50px;"></div>
+
+    <div style="background:white; padding:20px; border-radius:20px; margin-bottom:20px; border:1px solid var(--silver-light);">
+        <label style="margin-bottom:15px; display:block;">REGISTRAR NUEVO PESO</label>
+        <input type="number" id="new_weight" placeholder="Peso en kg" style="margin-bottom:10px;">
+        <select id="new_status" style="margin-bottom:10px;"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select>
+        <button class="btn-update" onclick="updateWeight()">AGREGAR PESAJE</button>
+    </div>
+
+    <button class="btn-update" style="background:var(--accent-silver)" onclick="editProfile()">EDITAR PERFIL (ID/SEXO)</button>
+    <div id="history-list" style="margin-top:20px;"></div>
 </div>
 
 <script>
-    // Se mantiene la lógica del código anterior para asegurar funcionalidad
-    let db = JSON.parse(localStorage.getItem('fenix_v6')) || [];
+    let db = JSON.parse(localStorage.getItem('fenix_v7')) || [];
     let savedLogo = localStorage.getItem('fenix_logo');
+    let currentAnimalId = null;
+
     if(savedLogo) document.getElementById('app-logo').src = savedLogo;
 
     function showModal(type, id = null) {
         if(type === 'register') {
+            currentAnimalId = null;
+            document.getElementById('modal-reg-title').innerText = "Nuevo Registro";
+            document.getElementById('p_id').value = "";
+            document.getElementById('reg-extra-fields').style.display = "block";
+            document.getElementById('btn-del-animal').style.display = "none";
             document.getElementById('modal-reg').style.display = 'block';
-            document.getElementById('p_date').valueAsDate = new Date();
         } else {
             const animal = db.find(a => a.id === id);
-            document.getElementById('info-title').innerText = "Expediente: " + id;
-            const growth = calcGrowth(animal);
-            document.getElementById('info-daily').innerText = growth.daily + " kg/d";
-            document.getElementById('info-net').innerText = "+" + growth.net + " kg";
-            
-            document.getElementById('history-list').innerHTML = animal.history.map(h => `
-                <div class="history-row">
-                    <span style="color:var(--accent-silver)">${h.date}</span>
-                    <span style="color:var(--royal-blue)">${h.weight} kg</span>
-                    <span class="status-pill">${h.status}</span>
-                </div>
-            `).reverse().join('');
+            currentAnimalId = id;
+            document.getElementById('info-title').innerText = id;
+            document.getElementById('new_weight').value = "";
+            updateInfoModal(animal);
             document.getElementById('modal-info').style.display = 'block';
         }
+    }
+
+    function updateInfoModal(animal) {
+        const growth = calcGrowth(animal);
+        document.getElementById('info-daily').innerText = growth.daily + " kg/d";
+        document.getElementById('info-net').innerText = "+" + growth.net + " kg";
+        document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + animal.history.map(h => `
+            <div class="history-row">
+                <span>${h.date}</span>
+                <span style="color:var(--royal-blue)">${h.weight} kg</span>
+                <span class="status-pill">${h.status}</span>
+            </div>
+        `).reverse().join('');
+    }
+
+    function editProfile() {
+        const animal = db.find(a => a.id === currentAnimalId);
+        document.getElementById('modal-reg-title').innerText = "Editar Perfil";
+        document.getElementById('edit-id-original').value = animal.id;
+        document.getElementById('p_id').value = animal.id;
+        document.getElementById('p_gender').value = animal.gender;
+        document.getElementById('reg-extra-fields').style.display = "none";
+        document.getElementById('btn-del-animal').style.display = "block";
+        document.getElementById('modal-reg').style.display = "block";
     }
 
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -198,28 +189,53 @@
 
     function saveData() {
         const id = document.getElementById('p_id').value;
-        const weight = parseFloat(document.getElementById('p_weight').value);
         const gender = document.getElementById('p_gender').value;
-        const status = document.getElementById('p_status').value;
-        const date = document.getElementById('p_date').value;
+        const originalId = document.getElementById('edit-id-original').value;
 
-        if(!id || isNaN(weight)) return;
+        if(!id) return;
 
-        const record = { weight, status, date, ts: new Date(date).getTime() };
-        let animal = db.find(a => a.id === id);
-
-        if(animal) {
-            animal.history.push(record);
-            animal.lastWeight = weight;
-            animal.lastStatus = status;
-            animal.history.sort((a,b) => a.ts - b.ts);
+        if(originalId && currentAnimalId) {
+            // Edición de perfil existente
+            let animal = db.find(a => a.id === originalId);
+            animal.id = id;
+            animal.gender = gender;
         } else {
+            // Nuevo registro
+            const weight = parseFloat(document.getElementById('p_weight').value);
+            const status = document.getElementById('p_status').value;
+            if(isNaN(weight)) return;
+            const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
             db.unshift({ id, gender, lastWeight: weight, lastStatus: status, history: [record] });
         }
 
-        localStorage.setItem('fenix_v6', JSON.stringify(db));
+        saveAndRender();
         closeModal('modal-reg');
-        render();
+        closeModal('modal-info');
+    }
+
+    function updateWeight() {
+        const weight = parseFloat(document.getElementById('new_weight').value);
+        const status = document.getElementById('new_status').value;
+        if(isNaN(weight)) return;
+
+        let animal = db.find(a => a.id === currentAnimalId);
+        const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
+        
+        animal.history.push(record);
+        animal.lastWeight = weight;
+        animal.lastStatus = status;
+        
+        saveAndRender();
+        updateInfoModal(animal);
+    }
+
+    function deleteAnimal() {
+        if(confirm("¿Eliminar este animal y todo su historial?")) {
+            db = db.filter(a => a.id !== currentAnimalId);
+            saveAndRender();
+            closeModal('modal-reg');
+            closeModal('modal-info');
+        }
     }
 
     function calcGrowth(a) {
@@ -231,22 +247,24 @@
         return { daily: (net/days).toFixed(2), net: net.toFixed(2) };
     }
 
+    function saveAndRender() {
+        localStorage.setItem('fenix_v7', JSON.stringify(db));
+        render();
+    }
+
     function render() {
         const q = document.getElementById('search').value.toLowerCase();
         const filtered = db.filter(a => a.id.toLowerCase().includes(q));
-        
         document.getElementById('animal-list').innerHTML = filtered.map(a => `
             <div class="animal-card">
                 <div style="flex:1">
-                    <h3 style="margin:0; font-size:1.5rem; font-weight:800; color:var(--royal-blue);">${a.id}</h3>
+                    <h3 style="margin:0; font-size:1.5rem; color:var(--royal-blue);">${a.id}</h3>
                     <div style="font-size:0.85rem; color:var(--text-sub); margin:8px 0;">
-                        Peso: <b style="color:var(--text-dark)">${a.lastWeight}kg</b> • <b>${a.gender}</b>
+                        Peso: <b>${a.lastWeight}kg</b> • <b>${a.gender}</b>
                     </div>
-                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">VER INFORME ELITE</button>
+                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">EXPEDIENTE ELITE</button>
                 </div>
-                <div class="status-pill">
-                    ${a.lastStatus.toUpperCase()}
-                </div>
+                <div class="status-pill">${a.lastStatus.toUpperCase()}</div>
             </div>
         `).join('');
 
