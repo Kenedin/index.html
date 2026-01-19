@@ -11,6 +11,7 @@
             --silver-light: #e5e7eb; --bg-platinum: #f1f3f5;
             --card-white: #ffffff; --text-dark: #0f172a;
             --text-sub: #475569; --accent-silver: #94a3b8;
+            --danger: #dc2626;
         }
 
         body { 
@@ -45,21 +46,21 @@
         
         .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 14px; border-radius: 15px; font-weight: 700; margin-top: 15px; width: 100%; }
 
-        /* MODALES */
         .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: 2.5rem 1.5rem; overflow-y: auto; box-sizing: border-box; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid var(--silver-light); padding-bottom: 15px; }
         .input-group { margin-bottom: 18px; }
         label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 8px; }
         input, select { width: 100%; padding: 16px; border-radius: 18px; border: 1px solid var(--silver-light); background: white; font-size: 1rem; box-sizing: border-box; font-family: inherit; }
         
-        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(0, 35, 102, 0.3); }
+        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 1.1rem; }
         .btn-update { background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 10px; }
-        .btn-delete { background: #fee2e2; color: #dc2626; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 20px; }
+        .btn-delete-full { background: #fee2e2; color: var(--danger); border: 1px solid #fecaca; padding: 14px; border-radius: 15px; font-weight: 800; width: 100%; margin-top: 30px; }
+        .btn-del-record { background: none; border: none; color: var(--danger); font-size: 0.7rem; font-weight: 800; padding: 5px; }
 
         .fab { position: fixed; bottom: 35px; right: 25px; width: 75px; height: 75px; background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light); font-size: 35px; box-shadow: 0 15px 30px rgba(0,35,102,0.4); z-index: 80; }
 
         .growth-box { background: var(--card-white); border-radius: 25px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; border: 1px solid var(--silver-light); }
-        .history-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.9rem; font-weight: 600; }
+        .history-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.85rem; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -79,7 +80,7 @@
 <div class="stats">
     <div class="stat-item"><span>Total</span><b id="k-total">0</b></div>
     <div class="stat-item"><span>Media Kg</span><b id="k-avg">0</b></div>
-    <div class="stat-item"><span>Alertas</span><b id="k-crit" style="color:#ef4444">0</b></div>
+    <div class="stat-item"><span>Alertas</span><b id="k-crit" style="color:var(--danger)">0</b></div>
 </div>
 
 <div class="container">
@@ -102,7 +103,6 @@
         <div class="input-group"><label>ESTADO SALUD</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
     </div>
     <button class="btn-save" id="btn-save-main" onclick="saveData()">CONFIRMAR</button>
-    <button class="btn-delete" id="btn-del-animal" style="display:none;" onclick="deleteAnimal()">ELIMINAR ANIMAL</button>
 </div>
 
 <div id="modal-info" class="modal">
@@ -123,12 +123,13 @@
         <button class="btn-update" onclick="updateWeight()">AGREGAR PESAJE</button>
     </div>
 
-    <button class="btn-update" style="background:var(--accent-silver)" onclick="editProfile()">EDITAR PERFIL (ID/SEXO)</button>
-    <div id="history-list" style="margin-top:20px;"></div>
+    <div id="history-list"></div>
+
+    <button class="btn-delete-full" onclick="deleteFullAnimal()">ELIMINAR ESTE CERDO POR COMPLETO</button>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('fenix_v7')) || [];
+    let db = JSON.parse(localStorage.getItem('fenix_v8')) || [];
     let savedLogo = localStorage.getItem('fenix_logo');
     let currentAnimalId = null;
 
@@ -136,17 +137,12 @@
 
     function showModal(type, id = null) {
         if(type === 'register') {
-            currentAnimalId = null;
-            document.getElementById('modal-reg-title').innerText = "Nuevo Registro";
-            document.getElementById('p_id').value = "";
-            document.getElementById('reg-extra-fields').style.display = "block";
-            document.getElementById('btn-del-animal').style.display = "none";
             document.getElementById('modal-reg').style.display = 'block';
+            document.getElementById('p_id').value = "";
         } else {
             const animal = db.find(a => a.id === id);
             currentAnimalId = id;
-            document.getElementById('info-title').innerText = id;
-            document.getElementById('new_weight').value = "";
+            document.getElementById('info-title').innerText = "Cerdo: " + id;
             updateInfoModal(animal);
             document.getElementById('modal-info').style.display = 'block';
         }
@@ -156,24 +152,43 @@
         const growth = calcGrowth(animal);
         document.getElementById('info-daily').innerText = growth.daily + " kg/d";
         document.getElementById('info-net').innerText = "+" + growth.net + " kg";
-        document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + animal.history.map(h => `
+        
+        document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + 
+        animal.history.map((h, index) => `
             <div class="history-row">
-                <span>${h.date}</span>
-                <span style="color:var(--royal-blue)">${h.weight} kg</span>
-                <span class="status-pill">${h.status}</span>
+                <div style="display:flex; flex-direction:column;">
+                    <span>${h.date}</span>
+                    <small style="color:var(--accent-silver); font-size:0.6rem;">${h.status}</small>
+                </div>
+                <span style="color:var(--royal-blue); font-weight:800;">${h.weight} kg</span>
+                <button class="btn-del-record" onclick="deleteRecord(${index})">BORRAR</button>
             </div>
         `).reverse().join('');
     }
 
-    function editProfile() {
-        const animal = db.find(a => a.id === currentAnimalId);
-        document.getElementById('modal-reg-title').innerText = "Editar Perfil";
-        document.getElementById('edit-id-original').value = animal.id;
-        document.getElementById('p_id').value = animal.id;
-        document.getElementById('p_gender').value = animal.gender;
-        document.getElementById('reg-extra-fields').style.display = "none";
-        document.getElementById('btn-del-animal').style.display = "block";
-        document.getElementById('modal-reg').style.display = "block";
+    function deleteRecord(recordIndex) {
+        if(confirm("¿Seguro que quieres borrar este pesaje específico?")) {
+            let animal = db.find(a => a.id === currentAnimalId);
+            animal.history.splice(animal.history.length - 1 - recordIndex, 1);
+            
+            if(animal.history.length === 0) {
+                deleteFullAnimal();
+            } else {
+                const lastEntry = animal.history[animal.history.length - 1];
+                animal.lastWeight = lastEntry.weight;
+                animal.lastStatus = lastEntry.status;
+                saveAndRender();
+                updateInfoModal(animal);
+            }
+        }
+    }
+
+    function deleteFullAnimal() {
+        if(confirm("¿Eliminar este cerdo y todo su historial de la base de datos?")) {
+            db = db.filter(a => a.id !== currentAnimalId);
+            saveAndRender();
+            closeModal('modal-info');
+        }
     }
 
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -189,53 +204,32 @@
 
     function saveData() {
         const id = document.getElementById('p_id').value;
+        const weight = parseFloat(document.getElementById('p_weight').value);
         const gender = document.getElementById('p_gender').value;
-        const originalId = document.getElementById('edit-id-original').value;
+        const status = document.getElementById('p_status').value;
 
-        if(!id) return;
+        if(!id || isNaN(weight)) return alert("Datos incompletos");
 
-        if(originalId && currentAnimalId) {
-            // Edición de perfil existente
-            let animal = db.find(a => a.id === originalId);
-            animal.id = id;
-            animal.gender = gender;
-        } else {
-            // Nuevo registro
-            const weight = parseFloat(document.getElementById('p_weight').value);
-            const status = document.getElementById('p_status').value;
-            if(isNaN(weight)) return;
-            const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
-            db.unshift({ id, gender, lastWeight: weight, lastStatus: status, history: [record] });
-        }
+        const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
+        db.unshift({ id, gender, lastWeight: weight, lastStatus: status, history: [record] });
 
         saveAndRender();
         closeModal('modal-reg');
-        closeModal('modal-info');
     }
 
     function updateWeight() {
         const weight = parseFloat(document.getElementById('new_weight').value);
         const status = document.getElementById('new_status').value;
-        if(isNaN(weight)) return;
+        if(isNaN(weight)) return alert("Ingresa un peso válido");
 
         let animal = db.find(a => a.id === currentAnimalId);
-        const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
-        
-        animal.history.push(record);
+        animal.history.push({ weight, status, date: new Date().toLocaleDateString(), ts: Date.now() });
         animal.lastWeight = weight;
         animal.lastStatus = status;
         
         saveAndRender();
         updateInfoModal(animal);
-    }
-
-    function deleteAnimal() {
-        if(confirm("¿Eliminar este animal y todo su historial?")) {
-            db = db.filter(a => a.id !== currentAnimalId);
-            saveAndRender();
-            closeModal('modal-reg');
-            closeModal('modal-info');
-        }
+        document.getElementById('new_weight').value = "";
     }
 
     function calcGrowth(a) {
@@ -248,7 +242,7 @@
     }
 
     function saveAndRender() {
-        localStorage.setItem('fenix_v7', JSON.stringify(db));
+        localStorage.setItem('fenix_v8', JSON.stringify(db));
         render();
     }
 
@@ -262,7 +256,7 @@
                     <div style="font-size:0.85rem; color:var(--text-sub); margin:8px 0;">
                         Peso: <b>${a.lastWeight}kg</b> • <b>${a.gender}</b>
                     </div>
-                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">EXPEDIENTE ELITE</button>
+                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">VER EXPEDIENTE</button>
                 </div>
                 <div class="status-pill">${a.lastStatus.toUpperCase()}</div>
             </div>
