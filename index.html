@@ -5,6 +5,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FenixElite">
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <title>Fenix Group Elite</title>
@@ -18,29 +20,38 @@
             --accent-silver: #94a3b8; --danger: #dc2626;
         }
 
+        /* Bloqueo de scroll del navegador para evitar barras */
+        html, body { 
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            overflow: hidden; 
+            background: var(--royal-blue); /* Fondo base para el notch */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-platinum); color: var(--text-dark);
-            margin: 0; padding-top: env(safe-area-inset-top);
-            /* Evita el rebote de Safari */
-            overflow-x: hidden;
-            position: fixed; width: 100%; height: 100%;
+            background: var(--bg-platinum);
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            background: var(--royal-blue); padding: calc(1rem + env(safe-area-inset-top)) 1.5rem 1.5rem; 
+            background: var(--royal-blue); 
+            padding: calc(40px + env(safe-area-inset-top)) 1.5rem 1.5rem; 
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 3px solid var(--accent-silver); color: white; border-radius: 0 0 30px 30px;
+            flex-shrink: 0;
         }
 
-        /* Área de contenido con scroll independiente para evitar barras de Safari */
+        /* Área de contenido con scroll táctil suave */
         .main-scroll {
-            height: calc(100vh - 120px);
+            flex-grow: 1;
             overflow-y: auto;
-            padding-bottom: 100px;
             -webkit-overflow-scrolling: touch;
+            padding-bottom: 120px;
         }
 
-        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         #app-logo { width: 50px; height: 50px; border-radius: 14px; object-fit: cover; border: 2px solid var(--silver-light); background: white; }
         .time-display { font-weight: 600; color: var(--silver-light); font-size: 0.8rem; text-align: right; }
 
@@ -50,28 +61,29 @@
         .stat-item b { font-size: 1.1rem; font-weight: 800; color: var(--royal-blue); }
 
         .container { padding: 0 1.5rem; }
-        .search { width: 100%; padding: 16px; border-radius: 18px; border: 1px solid var(--silver-light); background: var(--card-white); margin-bottom: 20px; font-size: 1rem; outline: none; box-sizing: border-box; }
+        .search { width: 100%; padding: 18px; border-radius: 20px; border: 1px solid var(--silver-light); background: var(--card-white); margin-bottom: 20px; font-size: 1rem; outline: none; box-sizing: border-box; }
         
         .animal-card { 
-            background: var(--card-white); border-radius: 25px; padding: 20px; margin-bottom: 15px;
+            background: var(--card-white); border-radius: 28px; padding: 22px; margin-bottom: 15px;
             display: flex; justify-content: space-between; align-items: center;
             border-left: 6px solid var(--royal-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .status-pill { padding: 4px 12px; border-radius: 10px; font-size: 0.6rem; font-weight: 800; background: var(--silver-light); color: var(--royal-blue); }
-        
-        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; margin-top: 10px; width: 100%; }
+        .status-pill { padding: 5px 14px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; background: var(--silver-light); color: var(--royal-blue); }
+        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; margin-top: 15px; width: 100%; }
 
-        .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: calc(2rem + env(safe-area-inset-top)) 1.5rem; overflow-y: auto; box-sizing: border-box; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        /* MODALES */
+        .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: calc(20px + env(safe-area-inset-top)) 1.5rem; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        
         .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 5px; }
-        input, select { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid var(--silver-light); font-size: 1rem; box-sizing: border-box; }
+        label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 5px; }
+        input, select { width: 100%; padding: 16px; border-radius: 15px; border: 1px solid var(--silver-light); font-size: 1rem; box-sizing: border-box; }
         
-        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 18px; border-radius: 18px; border: none; font-weight: 800; font-size: 1rem; }
-        .fab { position: fixed; bottom: 40px; right: 25px; width: 70px; height: 70px; background: var(--royal-blue); color: white; border-radius: 22px; border: 2px solid var(--silver-light); font-size: 30px; box-shadow: 0 10px 20px rgba(0,35,102,0.4); z-index: 90; }
+        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; }
+        .fab { position: fixed; bottom: 40px; right: 25px; width: 75px; height: 75px; background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light); font-size: 35px; box-shadow: 0 10px 20px rgba(0,35,102,0.4); z-index: 90; }
 
-        .growth-box { background: var(--card-white); border-radius: 22px; padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; border: 1px solid var(--silver-light); }
-        .history-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.8rem; }
+        .growth-box { background: var(--card-white); border-radius: 25px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; border: 1px solid var(--silver-light); }
+        .history-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.85rem; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -81,12 +93,12 @@
         <img id="app-logo" src="https://via.placeholder.com/100/002366/ffffff?text=F" alt="Logo">
         <input type="file" id="logoInput" hidden accept="image/*" onchange="changeLogo(event)">
         <div>
-            <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group</div>
-            <div style="font-size: 0.65rem; color: var(--silver-light); font-weight: 600;">ELITE MANAGEMENT</div>
+            <div style="font-weight: 800; font-size: 1.2rem;">Fenix Group</div>
+            <div style="font-size: 0.7rem; color: var(--silver-light); font-weight: 600; opacity: 0.8;">ELITE MANAGEMENT</div>
         </div>
     </div>
     <div class="time-display">
-        <div id="date-now" style="font-size: 0.65rem; opacity: 0.8;">--/--/--</div>
+        <div id="date-now" style="font-size: 0.65rem;">--/--/--</div>
         <div id="clock">00:00</div>
     </div>
 </header>
@@ -99,7 +111,7 @@
     </div>
 
     <div class="container">
-        <input type="text" id="search" class="search" placeholder="🔍 Buscar ID..." onkeyup="render()">
+        <input type="text" id="search" class="search" placeholder="🔍 Buscar ID o Fecha..." onkeyup="render()">
         <div id="animal-list"></div>
     </div>
 </div>
@@ -111,11 +123,11 @@
         <h2 style="margin:0; font-weight:800; color: var(--royal-blue);">Nuevo Registro</h2>
         <span onclick="closeModal('modal-reg')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
     </div>
-    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id"></div>
+    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id" placeholder="ID del animal"></div>
     <div class="input-group"><label>GÉNERO</label><select id="p_gender"><option>Macho</option><option>Hembra</option></select></div>
-    <div class="input-group"><label>PESO (KG)</label><input type="number" id="p_weight"></div>
-    <div class="input-group"><label>SALUD</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
-    <button class="btn-save" onclick="saveData()">CONFIRMAR</button>
+    <div class="input-group"><label>PESO INICIAL (KG)</label><input type="number" id="p_weight" placeholder="0.00"></div>
+    <div class="input-group"><label>ESTADO</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
+    <button class="btn-save" onclick="saveData()">CONFIRMAR REGISTRO</button>
 </div>
 
 <div id="modal-info" class="modal">
@@ -124,16 +136,15 @@
         <span onclick="closeModal('modal-info')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
     </div>
     <div class="growth-box">
-        <div><small>DIARIO</small><div style="font-weight:800; color:var(--royal-blue);" id="info-daily">0.00</div></div>
-        <div><small>NETO</small><div style="font-weight:800;" id="info-net">+0.00</div></div>
+        <div><small>DIARIO (KG)</small><div style="font-weight:800; color:var(--royal-blue); font-size:1.2rem;" id="info-daily">0.00</div></div>
+        <div><small>TOTAL NETO</small><div style="font-weight:800; font-size:1.2rem;" id="info-net">+0.00</div></div>
     </div>
-    <div id="history-list"></div>
-    <button onclick="deleteFullAnimal()" style="background:none; border:none; color:var(--danger); width:100%; margin-top:30px; font-weight:800; font-size:0.7rem;">ELIMINAR CERDO DEFINITIVAMENTE</button>
+    <div id="history-list" style="margin-bottom:30px;"></div>
+    <button onclick="deleteFullAnimal()" style="background:none; border:none; color:var(--danger); width:100%; font-weight:800; font-size:0.75rem; text-decoration:underline;">ELIMINAR ESTE REGISTRO</button>
 </div>
 
 <script>
-    // Lógica optimizada para evitar recargas
-    let db = JSON.parse(localStorage.getItem('fenix_v10')) || [];
+    let db = JSON.parse(localStorage.getItem('fenix_v11')) || [];
     let savedLogo = localStorage.getItem('fenix_logo');
     let currentAnimalId = null;
 
@@ -153,10 +164,10 @@
 
     function updateInfoModal(animal) {
         const growth = calcGrowth(animal);
-        document.getElementById('info-daily').innerText = growth.daily + " kg";
-        document.getElementById('info-net').innerText = "+" + growth.net + " kg";
-        document.getElementById('history-list').innerHTML = `<label>HISTORIAL</label>` + 
-        animal.history.map((h, index) => `
+        document.getElementById('info-daily').innerText = growth.daily;
+        document.getElementById('info-net').innerText = "+" + growth.net;
+        document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + 
+        animal.history.map((h) => `
             <div class="history-row">
                 <span>${h.date}</span>
                 <b style="color:var(--royal-blue)">${h.weight} kg</b>
@@ -165,7 +176,7 @@
     }
 
     function deleteFullAnimal() {
-        if(confirm("¿Borrar cerdo?")) {
+        if(confirm("¿Eliminar registro?")) {
             db = db.filter(a => a.id !== currentAnimalId);
             saveAndRender();
             closeModal('modal-info');
@@ -205,19 +216,21 @@
     }
 
     function saveAndRender() {
-        localStorage.setItem('fenix_v10', JSON.stringify(db));
+        localStorage.setItem('fenix_v11', JSON.stringify(db));
         render();
     }
 
     function render() {
-        document.getElementById('animal-list').innerHTML = db.map(a => `
-            <div class="animal-card">
-                <div style="flex:1" onclick="showModal('info', '${a.id}')">
-                    <h3 style="margin:0;">${a.id}</h3>
-                    <small>${a.lastWeight}kg</small>
-                    <button class="btn-informe">VER EXPEDIENTE</button>
+        const q = document.getElementById('search').value.toLowerCase();
+        const filtered = db.filter(a => a.id.toLowerCase().includes(q));
+        document.getElementById('animal-list').innerHTML = filtered.map(a => `
+            <div class="animal-card" onclick="showModal('info', '${a.id}')">
+                <div style="flex:1">
+                    <h3 style="margin:0; font-size:1.4rem; color:var(--royal-blue);">${a.id}</h3>
+                    <small>${a.lastWeight}kg • ${a.lastStatus}</small>
+                    <button class="btn-informe">EXPEDIENTE</button>
                 </div>
-                <div class="status-pill">${a.lastStatus}</div>
+                <div class="status-pill">VER</div>
             </div>
         `).join('');
         document.getElementById('k-total').innerText = db.length;
