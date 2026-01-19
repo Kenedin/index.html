@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Fenix Group">
+    <meta name="apple-mobile-web-app-title" content="FenixGroup">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Fenix Group 🔥</title>
 
@@ -14,44 +14,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --brand: #059669;
-            --background: #fdfdfd;
-            --text-main: #0f172a;
-        }
-
+        :root { --brand: #059669; --bg: #fdfdfd; }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--background); 
-            margin: 0; 
-            padding-top: env(safe-area-inset-top); /* Evita que el contenido choque con la hora del iPhone */
+            background-color: var(--bg); margin: 0; 
+            padding-top: env(safe-area-inset-top);
         }
-
         nav { 
-            background: white; 
-            padding: 1.2rem 1.5rem; 
-            border-bottom: 1px solid #f1f5f9; 
-            display: flex; align-items: center; gap: 12px;
+            background: white; padding: 1.2rem 1.5rem; 
+            border-bottom: 1px solid #f1f5f9; display: flex; 
+            align-items: center; gap: 12px;
         }
-
-        .logo-box { 
-            width: 42px; height: 42px; background: var(--brand); 
-            border-radius: 12px; display: flex; align-items: center; 
-            justify-content: center; color: white; font-weight: 800; 
-        }
-
-        .container { padding: 1.5rem; text-align: center; }
-        
-        .card { 
-            background: white; border-radius: 20px; padding: 2rem; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
-        }
-
-        .btn-plus {
-            position: fixed; bottom: 30px; right: 20px;
-            width: 60px; height: 60px; background: var(--brand);
-            color: white; border-radius: 20px; border: none;
-            font-size: 24px; box-shadow: 0 10px 20px rgba(5,150,105,0.3);
+        .logo-box { width: 42px; height: 42px; background: var(--brand); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; }
+        .container { padding: 1.5rem; }
+        .status-app {
+            background: #fffbeb; border: 1px solid #fef3c7;
+            padding: 1rem; border-radius: 15px; color: #92400e;
+            font-size: 0.85rem; display: none; /* Se activa solo en Safari */
         }
     </style>
 </head>
@@ -61,24 +40,33 @@
     <div class="logo-box">F</div>
     <div>
         <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group 🔥</div>
-        <div style="font-size: 0.7rem; color: #64748b;">MODO APP ACTIVO</div>
+        <div style="font-size: 0.7rem; color: #64748b;">SISTEMA DE CONTROL</div>
     </div>
 </nav>
 
 <div class="container">
-    <div class="card">
-        <h2 style="margin-bottom: 10px;">¡Casi listo!</h2>
-        <p style="font-size: 0.9rem; color: #64748b;">Si ves la barra de Safari abajo, borra el icono viejo de tu pantalla y vuelve a darle a <b>"Agregar a inicio"</b> con este nuevo código.</p>
+    <div id="safari-notice" class="status-app">
+        ⚠️ <b>Estás en modo Navegador.</b><br>
+        Para usar como APP: Toca compartir y "Agregar a inicio". Luego abre el icono de tu pantalla.
+    </div>
+    
+    <div style="margin-top: 2rem; text-align: center;">
+        <div style="font-size: 3rem;">🐷</div>
+        <h2 id="app-status">Cargando Sistema...</h2>
     </div>
 </div>
 
-<button class="btn-plus">+</button>
-
 <script>
-    // Este script detecta si ya estás dentro de la App y oculta cosas si es necesario
-    if (window.navigator.standalone === true) {
-        console.log("Ejecutando como App independiente");
-    }
+    // DETECTAR SI ES APP O WEB
+    window.addEventListener('load', () => {
+        if (window.navigator.standalone === true) {
+            document.getElementById('app-status').innerText = "MODO APP ACTIVO ✅";
+            document.getElementById('safari-notice').style.display = "none";
+        } else {
+            document.getElementById('app-status').innerText = "Modo Vista Web";
+            document.getElementById('safari-notice').style.display = "block";
+        }
+    });
 </script>
 </body>
 </html>
