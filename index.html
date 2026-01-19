@@ -5,8 +5,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FenixElite">
-    <meta name="mobile-web-app-capable" content="yes">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <title>Fenix Group Elite</title>
@@ -20,70 +18,56 @@
             --accent-silver: #94a3b8; --danger: #dc2626;
         }
 
-        /* Bloqueo de scroll del navegador para evitar barras */
         html, body { 
-            margin: 0; padding: 0;
-            height: 100%; width: 100%;
-            overflow: hidden; 
-            background: var(--royal-blue); /* Fondo base para el notch */
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; 
+            background: var(--royal-blue); font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        body { 
-            background: var(--bg-platinum);
-            display: flex;
-            flex-direction: column;
-        }
+        body { background: var(--bg-platinum); display: flex; flex-direction: column; }
 
         header {
             background: var(--royal-blue); 
-            padding: calc(40px + env(safe-area-inset-top)) 1.5rem 1.5rem; 
+            padding: calc(35px + env(safe-area-inset-top)) 1.5rem 1.5rem; 
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 3px solid var(--accent-silver); color: white; border-radius: 0 0 30px 30px;
-            flex-shrink: 0;
+            flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* Área de contenido con scroll táctil suave */
-        .main-scroll {
-            flex-grow: 1;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 120px;
-        }
+        .main-scroll { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 120px; }
 
-        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        #app-logo { width: 50px; height: 50px; border-radius: 14px; object-fit: cover; border: 2px solid var(--silver-light); background: white; }
-        .time-display { font-weight: 600; color: var(--silver-light); font-size: 0.8rem; text-align: right; }
-
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        #app-logo { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; border: 2px solid var(--silver-light); background: white; }
+        
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 1.5rem; margin-top: -25px; }
-        .stat-item { background: var(--card-white); padding: 15px 5px; border-radius: 20px; text-align: center; border: 1px solid var(--silver-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .stat-item { background: var(--card-white); padding: 12px 5px; border-radius: 20px; text-align: center; border: 1px solid var(--silver-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .stat-item span { display: block; font-size: 0.6rem; font-weight: 800; color: var(--accent-silver); text-transform: uppercase; }
         .stat-item b { font-size: 1.1rem; font-weight: 800; color: var(--royal-blue); }
 
         .container { padding: 0 1.5rem; }
-        .search { width: 100%; padding: 18px; border-radius: 20px; border: 1px solid var(--silver-light); background: var(--card-white); margin-bottom: 20px; font-size: 1rem; outline: none; box-sizing: border-box; }
+        .search { width: 100%; padding: 16px; border-radius: 18px; border: 1px solid var(--silver-light); margin-bottom: 20px; font-size: 1rem; outline: none; box-sizing: border-box; }
         
         .animal-card { 
-            background: var(--card-white); border-radius: 28px; padding: 22px; margin-bottom: 15px;
+            background: var(--card-white); border-radius: 25px; padding: 20px; margin-bottom: 15px;
             display: flex; justify-content: space-between; align-items: center;
             border-left: 6px solid var(--royal-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .status-pill { padding: 5px 14px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; background: var(--silver-light); color: var(--royal-blue); }
-        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; margin-top: 15px; width: 100%; }
+
+        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; margin-top: 10px; width: 100%; }
 
         /* MODALES */
         .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: calc(20px + env(safe-area-inset-top)) 1.5rem; overflow-y: auto; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         
         .input-group { margin-bottom: 15px; }
         label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 5px; }
-        input, select { width: 100%; padding: 16px; border-radius: 15px; border: 1px solid var(--silver-light); font-size: 1rem; box-sizing: border-box; }
+        input, select { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid var(--silver-light); font-size: 1rem; box-sizing: border-box; font-family: inherit; }
         
-        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; }
-        .fab { position: fixed; bottom: 40px; right: 25px; width: 75px; height: 75px; background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light); font-size: 35px; box-shadow: 0 10px 20px rgba(0,35,102,0.4); z-index: 90; }
+        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 18px; border-radius: 18px; border: none; font-weight: 800; }
+        .btn-update { background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 10px; }
+        .fab { position: fixed; bottom: 40px; right: 25px; width: 70px; height: 70px; background: var(--royal-blue); color: white; border-radius: 22px; border: 2px solid var(--silver-light); font-size: 30px; box-shadow: 0 10px 20px rgba(0,35,102,0.4); z-index: 90; }
 
-        .growth-box { background: var(--card-white); border-radius: 25px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; border: 1px solid var(--silver-light); }
-        .history-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.85rem; font-weight: 600; }
+        .growth-box { background: var(--card-white); border-radius: 22px; padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; border: 1px solid var(--silver-light); text-align: center;}
+        .history-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -93,21 +77,18 @@
         <img id="app-logo" src="https://via.placeholder.com/100/002366/ffffff?text=F" alt="Logo">
         <input type="file" id="logoInput" hidden accept="image/*" onchange="changeLogo(event)">
         <div>
-            <div style="font-weight: 800; font-size: 1.2rem;">Fenix Group</div>
-            <div style="font-size: 0.7rem; color: var(--silver-light); font-weight: 600; opacity: 0.8;">ELITE MANAGEMENT</div>
+            <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group</div>
+            <div id="date-now" style="font-size: 0.65rem; opacity: 0.8;">--/--/--</div>
         </div>
     </div>
-    <div class="time-display">
-        <div id="date-now" style="font-size: 0.65rem;">--/--/--</div>
-        <div id="clock">00:00</div>
-    </div>
+    <div id="clock" style="font-weight: 700; font-size: 0.9rem;">00:00</div>
 </header>
 
 <div class="main-scroll">
     <div class="stats">
         <div class="stat-item"><span>Total</span><b id="k-total">0</b></div>
         <div class="stat-item"><span>Media</span><b id="k-avg">0</b></div>
-        <div class="stat-item"><span>Críticos</span><b id="k-crit" style="color:var(--danger)">0</b></div>
+        <div class="stat-item"><span>Crit.</span><b id="k-crit" style="color:var(--danger)">0</b></div>
     </div>
 
     <div class="container">
@@ -123,9 +104,8 @@
         <h2 style="margin:0; font-weight:800; color: var(--royal-blue);">Nuevo Registro</h2>
         <span onclick="closeModal('modal-reg')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
     </div>
-    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id" placeholder="ID del animal"></div>
-    <div class="input-group"><label>GÉNERO</label><select id="p_gender"><option>Macho</option><option>Hembra</option></select></div>
-    <div class="input-group"><label>PESO INICIAL (KG)</label><input type="number" id="p_weight" placeholder="0.00"></div>
+    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id" placeholder="Ej: Elite-01"></div>
+    <div class="input-group"><label>PESO INICIAL (KG)</label><input type="number" id="p_weight"></div>
     <div class="input-group"><label>ESTADO</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
     <button class="btn-save" onclick="saveData()">CONFIRMAR REGISTRO</button>
 </div>
@@ -135,20 +115,37 @@
         <h2 id="info-title" style="margin:0; font-weight:800; color: var(--royal-blue);">--</h2>
         <span onclick="closeModal('modal-info')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
     </div>
+
     <div class="growth-box">
-        <div><small>DIARIO (KG)</small><div style="font-weight:800; color:var(--royal-blue); font-size:1.2rem;" id="info-daily">0.00</div></div>
-        <div><small>TOTAL NETO</small><div style="font-weight:800; font-size:1.2rem;" id="info-net">+0.00</div></div>
+        <div><small>DIARIO (KG)</small><div style="font-weight:800; color:var(--royal-blue);" id="info-daily">0.00</div></div>
+        <div><small>GANANCIA TOTAL</small><div style="font-weight:800;" id="info-net">+0.00</div></div>
     </div>
-    <div id="history-list" style="margin-bottom:30px;"></div>
-    <button onclick="deleteFullAnimal()" style="background:none; border:none; color:var(--danger); width:100%; font-weight:800; font-size:0.75rem; text-decoration:underline;">ELIMINAR ESTE REGISTRO</button>
+
+    <div style="background:white; padding:18px; border-radius:20px; margin-bottom:20px; border:1px solid var(--silver-light);">
+        <label>REGISTRAR PESAJE HOY</label>
+        <input type="number" id="new_weight" placeholder="Nuevo peso en kg" style="margin: 10px 0;">
+        <select id="new_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select>
+        <button class="btn-update" onclick="updateWeight()">AGREGAR PESAJE</button>
+    </div>
+
+    <div id="history-list"></div>
+    <button onclick="deleteFullAnimal()" style="background:none; border:none; color:var(--danger); width:100%; font-weight:800; font-size:0.75rem; margin-top:30px; text-decoration:underline;">ELIMINAR CERDO</button>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('fenix_v11')) || [];
+    let db = JSON.parse(localStorage.getItem('fenix_v12')) || [];
     let savedLogo = localStorage.getItem('fenix_logo');
     let currentAnimalId = null;
 
     if(savedLogo) document.getElementById('app-logo').src = savedLogo;
+
+    function getNow() {
+        const n = new Date();
+        return {
+            full: n.toLocaleDateString() + " " + n.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
+            ts: Date.now()
+        };
+    }
 
     function showModal(type, id = null) {
         if(type === 'register') {
@@ -156,7 +153,7 @@
         } else {
             const animal = db.find(a => a.id === id);
             currentAnimalId = id;
-            document.getElementById('info-title').innerText = "ID: " + id;
+            document.getElementById('info-title').innerText = "Expediente: " + id;
             updateInfoModal(animal);
             document.getElementById('modal-info').style.display = 'block';
         }
@@ -165,44 +162,61 @@
     function updateInfoModal(animal) {
         const growth = calcGrowth(animal);
         document.getElementById('info-daily').innerText = growth.daily;
-        document.getElementById('info-net').innerText = "+" + growth.net;
+        document.getElementById('info-net').innerText = "+" + growth.net + " kg";
         document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + 
-        animal.history.map((h) => `
+        animal.history.map((h, index) => `
             <div class="history-row">
-                <span>${h.date}</span>
-                <b style="color:var(--royal-blue)">${h.weight} kg</b>
+                <div style="display:flex; flex-direction:column">
+                    <span style="font-size:0.7rem; color:var(--accent-silver)">${h.date}</span>
+                    <b>${h.weight} kg</b>
+                </div>
+                <button onclick="deleteRecord(${index})" style="background:none; border:none; color:var(--danger); font-size:0.6rem; font-weight:800;">BORRAR</button>
             </div>
         `).reverse().join('');
     }
 
-    function deleteFullAnimal() {
-        if(confirm("¿Eliminar registro?")) {
-            db = db.filter(a => a.id !== currentAnimalId);
-            saveAndRender();
-            closeModal('modal-info');
-        }
+    function updateWeight() {
+        const weight = parseFloat(document.getElementById('new_weight').value);
+        if(isNaN(weight)) return;
+        const animal = db.find(a => a.id === currentAnimalId);
+        const time = getNow();
+        animal.history.push({ weight, date: time.full, ts: time.ts, status: document.getElementById('new_status').value });
+        animal.lastWeight = weight;
+        animal.lastStatus = document.getElementById('new_status').value;
+        animal.lastDate = time.full;
+        document.getElementById('new_weight').value = "";
+        saveAndRender();
+        updateInfoModal(animal);
     }
 
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function deleteRecord(idx) {
+        if(!confirm("¿Borrar pesaje?")) return;
+        const animal = db.find(a => a.id === currentAnimalId);
+        animal.history.splice(animal.history.length - 1 - idx, 1);
+        if(animal.history.length === 0) return deleteFullAnimal();
+        const last = animal.history[animal.history.length - 1];
+        animal.lastWeight = last.weight;
+        saveAndRender();
+        updateInfoModal(animal);
+    }
 
-    function changeLogo(e) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            document.getElementById('app-logo').src = reader.result;
-            localStorage.setItem('fenix_logo', reader.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
+    function deleteFullAnimal() {
+        if(!confirm("¿Borrar cerdo por completo?")) return;
+        db = db.filter(a => a.id !== currentAnimalId);
+        saveAndRender();
+        closeModal('modal-info');
     }
 
     function saveData() {
         const id = document.getElementById('p_id').value;
         const weight = parseFloat(document.getElementById('p_weight').value);
         if(!id || isNaN(weight)) return;
-
-        const date = new Date().toLocaleDateString();
-        const record = { weight, date, ts: Date.now() };
-        db.unshift({ id, lastWeight: weight, lastStatus: document.getElementById('p_status').value, history: [record] });
-
+        const time = getNow();
+        db.unshift({ 
+            id, lastWeight: weight, lastStatus: document.getElementById('p_status').value, 
+            lastDate: time.full, 
+            history: [{ weight, date: time.full, ts: time.ts, status: document.getElementById('p_status').value }] 
+        });
         saveAndRender();
         closeModal('modal-reg');
     }
@@ -215,25 +229,30 @@
         return { daily: ((last.weight - first.weight)/days).toFixed(2), net: (last.weight - first.weight).toFixed(2) };
     }
 
-    function saveAndRender() {
-        localStorage.setItem('fenix_v11', JSON.stringify(db));
-        render();
+    function saveAndRender() { localStorage.setItem('fenix_v12', JSON.stringify(db)); render(); }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function changeLogo(e) {
+        const reader = new FileReader();
+        reader.onload = () => { document.getElementById('app-logo').src = reader.result; localStorage.setItem('fenix_logo', reader.result); };
+        reader.readAsDataURL(e.target.files[0]);
     }
 
     function render() {
         const q = document.getElementById('search').value.toLowerCase();
-        const filtered = db.filter(a => a.id.toLowerCase().includes(q));
+        const filtered = db.filter(a => a.id.toLowerCase().includes(q) || a.lastDate.includes(q));
         document.getElementById('animal-list').innerHTML = filtered.map(a => `
-            <div class="animal-card" onclick="showModal('info', '${a.id}')">
+            <div class="animal-card">
                 <div style="flex:1">
-                    <h3 style="margin:0; font-size:1.4rem; color:var(--royal-blue);">${a.id}</h3>
-                    <small>${a.lastWeight}kg • ${a.lastStatus}</small>
-                    <button class="btn-informe">EXPEDIENTE</button>
+                    <h3 style="margin:0; color:var(--royal-blue);">${a.id}</h3>
+                    <small>Último: ${a.lastWeight}kg - ${a.lastDate}</small>
+                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">EXPEDIENTE</button>
                 </div>
-                <div class="status-pill">VER</div>
+                <div style="font-size:0.6rem; font-weight:800; color:var(--accent-silver)">${a.lastStatus.toUpperCase()}</div>
             </div>
         `).join('');
         document.getElementById('k-total').innerText = db.length;
+        document.getElementById('k-avg').innerText = db.length ? (db.reduce((s,a)=>s+a.lastWeight,0)/db.length).toFixed(1) : 0;
+        document.getElementById('k-crit').innerText = db.filter(a=>a.lastStatus==='Crítico').length;
     }
 
     setInterval(() => {
