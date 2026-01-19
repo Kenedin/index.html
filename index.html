@@ -5,68 +5,194 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FenixGroup">
-    <meta name="mobile-web-app-capable" content="yes">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
     <title>Fenix Group 🔥</title>
 
     <link rel="apple-touch-icon" href="https://via.placeholder.com/180/059669/ffffff?text=F">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        :root { --brand: #059669; --bg: #fdfdfd; }
+        :root {
+            --brand: #059669;
+            --brand-soft: #ecfdf5;
+            --surface: #ffffff;
+            --background: #fdfdfd;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --border: #f1f5f9;
+            --danger: #ef4444;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+        }
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg); margin: 0; 
-            padding-top: env(safe-area-inset-top);
+            background-color: var(--background); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding-top: env(safe-area-inset-top); /* Ajuste para la muesca del iPhone */
+            -webkit-tap-highlight-color: transparent;
         }
+
         nav { 
-            background: white; padding: 1.2rem 1.5rem; 
-            border-bottom: 1px solid #f1f5f9; display: flex; 
-            align-items: center; gap: 12px;
+            background: white; 
+            padding: 1.2rem 1.5rem; 
+            border-bottom: 1px solid var(--border); 
+            display: flex; align-items: center; justify-content: space-between;
         }
-        .logo-box { width: 42px; height: 42px; background: var(--brand); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; }
-        .container { padding: 1.5rem; }
-        .status-app {
-            background: #fffbeb; border: 1px solid #fef3c7;
-            padding: 1rem; border-radius: 15px; color: #92400e;
-            font-size: 0.85rem; display: none; /* Se activa solo en Safari */
+
+        .logo-box { 
+            width: 42px; height: 42px; background: var(--brand); 
+            border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; color: white; font-weight: 800; 
         }
+
+        .container { padding: 1.5rem; padding-bottom: 100px; }
+
+        /* BUSCADOR */
+        .search-input {
+            width: 100%; padding: 1rem 1rem 1rem 3rem; border: 1px solid var(--border);
+            border-radius: 16px; font-size: 1rem; background: var(--surface);
+            box-shadow: var(--shadow); outline: none; box-sizing: border-box;
+            margin-bottom: 1.5rem;
+        }
+
+        /* KPIs */
+        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
+        .kpi-card { 
+            background: var(--surface); padding: 1rem 0.5rem; border-radius: 20px; 
+            border: 1px solid var(--border); text-align: center; box-shadow: var(--shadow);
+        }
+        .kpi-label { font-size: 0.6rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; display: block; }
+        .kpi-val { font-size: 1.2rem; font-weight: 800; }
+
+        /* CARDS */
+        .pig-card { 
+            background: var(--surface); border-radius: 22px; padding: 1.2rem; 
+            margin-bottom: 1rem; border: 1px solid var(--border); box-shadow: var(--shadow);
+        }
+
+        .fab { 
+            position: fixed; bottom: calc(30px + env(safe-area-inset-bottom)); right: 20px; 
+            width: 65px; height: 65px; background: var(--brand); color: white; 
+            border-radius: 20px; border: none; font-size: 28px; 
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4); z-index: 100;
+        }
+
+        /* FORMULARIO */
+        .modal { 
+            display: none; position: fixed; inset: 0; background: white; 
+            z-index: 200; padding: calc(2rem + env(safe-area-inset-top)) 1.5rem; 
+        }
+        .form-control { width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box; }
+        .btn-save { background: var(--text-main); color: white; width: 100%; padding: 1.2rem; border-radius: 15px; border: none; font-weight: 800; font-size: 1rem; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo-box">F</div>
-    <div>
-        <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group 🔥</div>
-        <div style="font-size: 0.7rem; color: #64748b;">SISTEMA DE CONTROL</div>
+    <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo-box">F</div>
+        <div>
+            <div style="font-weight: 800; font-size: 1.1rem; line-height: 1;">Fenix Group 🔥</div>
+            <div id="offline-tag" style="font-size: 0.6rem; color: var(--brand); font-weight: 700;">MODO APP ACTIVO</div>
+        </div>
     </div>
+    <div id="clock" style="font-size: 0.8rem; font-weight: 600; color: var(--text-sub);"></div>
 </nav>
 
 <div class="container">
-    <div id="safari-notice" class="status-app">
-        ⚠️ <b>Estás en modo Navegador.</b><br>
-        Para usar como APP: Toca compartir y "Agregar a inicio". Luego abre el icono de tu pantalla.
+    <input type="text" id="search" class="search-input" placeholder="Buscar por ID..." onkeyup="render()">
+
+    <div class="kpi-grid">
+        <div class="kpi-card"><span class="kpi-label">Animales</span><div class="kpi-val" id="total-pigs">0</div></div>
+        <div class="kpi-card"><span class="kpi-label">Peso Prom.</span><div class="kpi-val" id="avg-weight">0</div></div>
+        <div class="kpi-card"><span class="kpi-label">Alertas</span><div class="kpi-val" id="alerts" style="color: var(--danger);">0</div></div>
     </div>
-    
-    <div style="margin-top: 2rem; text-align: center;">
-        <div style="font-size: 3rem;">🐷</div>
-        <h2 id="app-status">Cargando Sistema...</h2>
+
+    <div id="list"></div>
+</div>
+
+<button class="fab" onclick="toggleModal(true)">+</button>
+
+<div id="modal" class="modal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+        <h2 style="margin:0">Nuevo Registro</h2>
+        <button onclick="toggleModal(false)" style="border:none; background:#eee; padding:10px 15px; border-radius:12px; font-weight:800;">X</button>
     </div>
+    <input type="text" id="p_id" class="form-control" placeholder="ID del Cerdo">
+    <input type="number" id="p_weight" class="form-control" placeholder="Peso (kg)">
+    <select id="p_status" class="form-control">
+        <option>Sano</option>
+        <option>Tratamiento</option>
+        <option>Critico</option>
+    </select>
+    <button class="btn-save" onclick="savePig()">GUARDAR DATOS</button>
 </div>
 
 <script>
-    // DETECTAR SI ES APP O WEB
-    window.addEventListener('load', () => {
-        if (window.navigator.standalone === true) {
-            document.getElementById('app-status').innerText = "MODO APP ACTIVO ✅";
-            document.getElementById('safari-notice').style.display = "none";
-        } else {
-            document.getElementById('app-status').innerText = "Modo Vista Web";
-            document.getElementById('safari-notice').style.display = "block";
+    let db = JSON.parse(localStorage.getItem('fenix_db')) || [];
+
+    function toggleModal(show) {
+        document.getElementById('modal').style.display = show ? 'block' : 'none';
+    }
+
+    function savePig() {
+        const id = document.getElementById('p_id').value;
+        const weight = parseFloat(document.getElementById('p_weight').value);
+        const status = document.getElementById('p_status').value;
+
+        if(!id || isNaN(weight)) return alert("Completa los datos");
+
+        db.unshift({ id, weight, status, date: new Date().toLocaleDateString() });
+        localStorage.setItem('fenix_db', JSON.stringify(db));
+        
+        document.getElementById('p_id').value = '';
+        document.getElementById('p_weight').value = '';
+        
+        toggleModal(false);
+        render();
+    }
+
+    function deletePig(index) {
+        if(confirm("¿Eliminar registro?")) {
+            db.splice(index, 1);
+            localStorage.setItem('fenix_db', JSON.stringify(db));
+            render();
         }
-    });
+    }
+
+    function render() {
+        const query = document.getElementById('search').value.toLowerCase();
+        const list = document.getElementById('list');
+        const filtered = db.filter(p => p.id.toLowerCase().includes(query));
+
+        list.innerHTML = filtered.map((p, i) => `
+            <div class="pig-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="font-weight:800; font-size:1.1rem;">${p.id}</div>
+                    <span style="font-size:0.7rem; font-weight:800; color:${p.status === 'Sano' ? '#059669' : '#ef4444'}">${p.status.toUpperCase()}</span>
+                </div>
+                <div style="margin:10px 0; font-size:0.9rem; color:var(--text-sub);">
+                    Peso: <b>${p.weight}kg</b> • Fecha: ${p.date}
+                </div>
+                <button onclick="deletePig(${i})" style="border:none; background:none; color:var(--danger); font-size:0.8rem; font-weight:700; padding:0;">ELIMINAR</button>
+            </div>
+        `).join('');
+
+        // Actualizar KPIs
+        document.getElementById('total-pigs').innerText = db.length;
+        const avg = db.length ? (db.reduce((acc, p) => acc + p.weight, 0) / db.length).toFixed(1) : 0;
+        document.getElementById('avg-weight').innerText = avg;
+        document.getElementById('alerts').innerText = db.filter(p => p.status !== 'Sano').length;
+    }
+
+    // Reloj
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }, 1000);
+
+    window.onload = render;
 </script>
 </body>
 </html>
