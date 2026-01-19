@@ -2,277 +2,71 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FenixGroup">
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Fenix Group Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Fenix Group 🔥</title>
+
+    <link rel="apple-touch-icon" href="https://via.placeholder.com/180/059669/ffffff?text=F">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        :root {
-            --royal-blue: #002366; --silver-metal: #95a5a6;
-            --silver-light: #e5e7eb; --bg-platinum: #f1f3f5;
-            --card-white: #ffffff; --text-dark: #0f172a;
-            --text-sub: #475569; --accent-silver: #94a3b8;
-            --danger: #dc2626;
-        }
-
+        :root { --brand: #059669; --bg: #fdfdfd; }
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-platinum); color: var(--text-dark);
-            margin: 0; padding-top: env(safe-area-inset-top);
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); margin: 0; 
+            padding-top: env(safe-area-inset-top);
         }
-
-        header {
-            background: var(--royal-blue); padding: 1.8rem 1.5rem; display: flex; 
-            justify-content: space-between; align-items: center;
-            border-bottom: 3px solid var(--accent-silver); color: white; border-radius: 0 0 30px 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        nav { 
+            background: white; padding: 1.2rem 1.5rem; 
+            border-bottom: 1px solid #f1f5f9; display: flex; 
+            align-items: center; gap: 12px;
         }
-        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        #app-logo { width: 55px; height: 55px; border-radius: 16px; object-fit: cover; border: 2px solid var(--silver-light); background: white; }
-        .time-display { font-weight: 600; color: var(--silver-light); font-size: 0.85rem; }
-
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 1.5rem; margin-top: -20px; }
-        .stat-item { background: var(--card-white); padding: 18px 10px; border-radius: 24px; text-align: center; border: 1px solid var(--silver-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .stat-item span { display: block; font-size: 0.65rem; font-weight: 800; color: var(--accent-silver); text-transform: uppercase; margin-bottom: 6px; }
-        .stat-item b { font-size: 1.3rem; font-weight: 800; color: var(--royal-blue); }
-
-        .container { padding: 0 1.5rem 100px; }
-        .search { width: 100%; padding: 18px; border-radius: 20px; border: 1px solid var(--silver-light); background: var(--card-white); margin-bottom: 25px; font-size: 1rem; outline: none; box-sizing: border-box; }
-        
-        .animal-card { 
-            background: var(--card-white); border-radius: 28px; padding: 22px; margin-bottom: 18px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-left: 6px solid var(--royal-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        .logo-box { width: 42px; height: 42px; background: var(--brand); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; }
+        .container { padding: 1.5rem; }
+        .status-app {
+            background: #fffbeb; border: 1px solid #fef3c7;
+            padding: 1rem; border-radius: 15px; color: #92400e;
+            font-size: 0.85rem; display: none; /* Se activa solo en Safari */
         }
-        .status-pill { padding: 5px 14px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; background: var(--silver-light); color: var(--royal-blue); border: 1px solid var(--accent-silver); }
-        
-        .btn-informe { background: var(--royal-blue); color: white; border: none; padding: 14px; border-radius: 15px; font-weight: 700; margin-top: 15px; width: 100%; }
-
-        .modal { display: none; position: fixed; inset: 0; background: var(--bg-platinum); z-index: 100; padding: 2.5rem 1.5rem; overflow-y: auto; box-sizing: border-box; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid var(--silver-light); padding-bottom: 15px; }
-        .input-group { margin-bottom: 18px; }
-        label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--royal-blue); margin-bottom: 8px; }
-        input, select { width: 100%; padding: 16px; border-radius: 18px; border: 1px solid var(--silver-light); background: white; font-size: 1rem; box-sizing: border-box; font-family: inherit; }
-        
-        .btn-save { background: var(--royal-blue); color: white; width: 100%; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 1.1rem; }
-        .btn-update { background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-top: 10px; }
-        .btn-delete-full { background: #fee2e2; color: var(--danger); border: 1px solid #fecaca; padding: 14px; border-radius: 15px; font-weight: 800; width: 100%; margin-top: 30px; }
-        .btn-del-record { background: none; border: none; color: var(--danger); font-size: 0.7rem; font-weight: 800; padding: 5px; }
-
-        .fab { position: fixed; bottom: 35px; right: 25px; width: 75px; height: 75px; background: var(--royal-blue); color: white; border-radius: 25px; border: 2px solid var(--silver-light); font-size: 35px; box-shadow: 0 15px 30px rgba(0,35,102,0.4); z-index: 80; }
-
-        .growth-box { background: var(--card-white); border-radius: 25px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; border: 1px solid var(--silver-light); }
-        .history-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--silver-light); font-size: 0.85rem; font-weight: 600; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo-container" onclick="document.getElementById('logoInput').click()">
-        <img id="app-logo" src="https://via.placeholder.com/100/002366/ffffff?text=F" alt="Logo">
-        <input type="file" id="logoInput" hidden accept="image/*" onchange="changeLogo(event)">
-        <div>
-            <div style="font-weight: 800; font-size: 1.3rem;">Fenix Group</div>
-            <div style="font-size: 0.75rem; color: var(--silver-light); font-weight: 600;">ELITE MANAGEMENT</div>
-        </div>
+<nav>
+    <div class="logo-box">F</div>
+    <div>
+        <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group 🔥</div>
+        <div style="font-size: 0.7rem; color: #64748b;">SISTEMA DE CONTROL</div>
     </div>
-    <div class="time-display" id="clock">00:00 p.m.</div>
-</header>
-
-<div class="stats">
-    <div class="stat-item"><span>Total</span><b id="k-total">0</b></div>
-    <div class="stat-item"><span>Media Kg</span><b id="k-avg">0</b></div>
-    <div class="stat-item"><span>Alertas</span><b id="k-crit" style="color:var(--danger)">0</b></div>
-</div>
+</nav>
 
 <div class="container">
-    <input type="text" id="search" class="search" placeholder="🔍 Buscar por ID..." onkeyup="render()">
-    <div id="animal-list"></div>
-</div>
-
-<button class="fab" onclick="showModal('register')">+</button>
-
-<div id="modal-reg" class="modal">
-    <div class="modal-header">
-        <h2 id="modal-reg-title" style="margin:0; font-weight:800; color: var(--royal-blue);">Nuevo Registro</h2>
-        <span onclick="closeModal('modal-reg')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">X</span>
-    </div>
-    <input type="hidden" id="edit-id-original">
-    <div class="input-group"><label>IDENTIFICADOR</label><input type="text" id="p_id"></div>
-    <div class="input-group"><label>GÉNERO</label><select id="p_gender"><option>Macho</option><option>Hembra</option></select></div>
-    <div id="reg-extra-fields">
-        <div class="input-group"><label>PESO INICIAL (KG)</label><input type="number" id="p_weight"></div>
-        <div class="input-group"><label>ESTADO SALUD</label><select id="p_status"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select></div>
-    </div>
-    <button class="btn-save" id="btn-save-main" onclick="saveData()">CONFIRMAR</button>
-</div>
-
-<div id="modal-info" class="modal">
-    <div class="modal-header">
-        <h2 id="info-title" style="margin:0; font-weight:800; color: var(--royal-blue);">--</h2>
-        <span onclick="closeModal('modal-info')" style="font-weight:800; color:var(--accent-silver); cursor:pointer;">CERRAR</span>
+    <div id="safari-notice" class="status-app">
+        ⚠️ <b>Estás en modo Navegador.</b><br>
+        Para usar como APP: Toca compartir y "Agregar a inicio". Luego abre el icono de tu pantalla.
     </div>
     
-    <div class="growth-box">
-        <div><small>CRECIMIENTO DIARIO</small><div style="font-weight:800; color:var(--royal-blue);" id="info-daily">0.00 kg/d</div></div>
-        <div><small>GANANCIA TOTAL</small><div style="font-weight:800;" id="info-net">+0.00 kg</div></div>
+    <div style="margin-top: 2rem; text-align: center;">
+        <div style="font-size: 3rem;">🐷</div>
+        <h2 id="app-status">Cargando Sistema...</h2>
     </div>
-
-    <div style="background:white; padding:20px; border-radius:20px; margin-bottom:20px; border:1px solid var(--silver-light);">
-        <label style="margin-bottom:15px; display:block;">REGISTRAR NUEVO PESO</label>
-        <input type="number" id="new_weight" placeholder="Peso en kg" style="margin-bottom:10px;">
-        <select id="new_status" style="margin-bottom:10px;"><option>Sano</option><option>Tratamiento</option><option>Crítico</option></select>
-        <button class="btn-update" onclick="updateWeight()">AGREGAR PESAJE</button>
-    </div>
-
-    <div id="history-list"></div>
-
-    <button class="btn-delete-full" onclick="deleteFullAnimal()">ELIMINAR ESTE CERDO POR COMPLETO</button>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('fenix_v8')) || [];
-    let savedLogo = localStorage.getItem('fenix_logo');
-    let currentAnimalId = null;
-
-    if(savedLogo) document.getElementById('app-logo').src = savedLogo;
-
-    function showModal(type, id = null) {
-        if(type === 'register') {
-            document.getElementById('modal-reg').style.display = 'block';
-            document.getElementById('p_id').value = "";
+    // DETECTAR SI ES APP O WEB
+    window.addEventListener('load', () => {
+        if (window.navigator.standalone === true) {
+            document.getElementById('app-status').innerText = "MODO APP ACTIVO ✅";
+            document.getElementById('safari-notice').style.display = "none";
         } else {
-            const animal = db.find(a => a.id === id);
-            currentAnimalId = id;
-            document.getElementById('info-title').innerText = "Cerdo: " + id;
-            updateInfoModal(animal);
-            document.getElementById('modal-info').style.display = 'block';
+            document.getElementById('app-status').innerText = "Modo Vista Web";
+            document.getElementById('safari-notice').style.display = "block";
         }
-    }
-
-    function updateInfoModal(animal) {
-        const growth = calcGrowth(animal);
-        document.getElementById('info-daily').innerText = growth.daily + " kg/d";
-        document.getElementById('info-net').innerText = "+" + growth.net + " kg";
-        
-        document.getElementById('history-list').innerHTML = `<label>HISTORIAL DE PESAJE</label>` + 
-        animal.history.map((h, index) => `
-            <div class="history-row">
-                <div style="display:flex; flex-direction:column;">
-                    <span>${h.date}</span>
-                    <small style="color:var(--accent-silver); font-size:0.6rem;">${h.status}</small>
-                </div>
-                <span style="color:var(--royal-blue); font-weight:800;">${h.weight} kg</span>
-                <button class="btn-del-record" onclick="deleteRecord(${index})">BORRAR</button>
-            </div>
-        `).reverse().join('');
-    }
-
-    function deleteRecord(recordIndex) {
-        if(confirm("¿Seguro que quieres borrar este pesaje específico?")) {
-            let animal = db.find(a => a.id === currentAnimalId);
-            animal.history.splice(animal.history.length - 1 - recordIndex, 1);
-            
-            if(animal.history.length === 0) {
-                deleteFullAnimal();
-            } else {
-                const lastEntry = animal.history[animal.history.length - 1];
-                animal.lastWeight = lastEntry.weight;
-                animal.lastStatus = lastEntry.status;
-                saveAndRender();
-                updateInfoModal(animal);
-            }
-        }
-    }
-
-    function deleteFullAnimal() {
-        if(confirm("¿Eliminar este cerdo y todo su historial de la base de datos?")) {
-            db = db.filter(a => a.id !== currentAnimalId);
-            saveAndRender();
-            closeModal('modal-info');
-        }
-    }
-
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-    function changeLogo(e) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            document.getElementById('app-logo').src = reader.result;
-            localStorage.setItem('fenix_logo', reader.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    }
-
-    function saveData() {
-        const id = document.getElementById('p_id').value;
-        const weight = parseFloat(document.getElementById('p_weight').value);
-        const gender = document.getElementById('p_gender').value;
-        const status = document.getElementById('p_status').value;
-
-        if(!id || isNaN(weight)) return alert("Datos incompletos");
-
-        const record = { weight, status, date: new Date().toLocaleDateString(), ts: Date.now() };
-        db.unshift({ id, gender, lastWeight: weight, lastStatus: status, history: [record] });
-
-        saveAndRender();
-        closeModal('modal-reg');
-    }
-
-    function updateWeight() {
-        const weight = parseFloat(document.getElementById('new_weight').value);
-        const status = document.getElementById('new_status').value;
-        if(isNaN(weight)) return alert("Ingresa un peso válido");
-
-        let animal = db.find(a => a.id === currentAnimalId);
-        animal.history.push({ weight, status, date: new Date().toLocaleDateString(), ts: Date.now() });
-        animal.lastWeight = weight;
-        animal.lastStatus = status;
-        
-        saveAndRender();
-        updateInfoModal(animal);
-        document.getElementById('new_weight').value = "";
-    }
-
-    function calcGrowth(a) {
-        if(a.history.length < 2) return { daily: "0.00", net: "0.00" };
-        const first = a.history[0];
-        const last = a.history[a.history.length - 1];
-        const days = Math.max(1, (last.ts - first.ts) / (1000*60*60*24));
-        const net = last.weight - first.weight;
-        return { daily: (net/days).toFixed(2), net: net.toFixed(2) };
-    }
-
-    function saveAndRender() {
-        localStorage.setItem('fenix_v8', JSON.stringify(db));
-        render();
-    }
-
-    function render() {
-        const q = document.getElementById('search').value.toLowerCase();
-        const filtered = db.filter(a => a.id.toLowerCase().includes(q));
-        document.getElementById('animal-list').innerHTML = filtered.map(a => `
-            <div class="animal-card">
-                <div style="flex:1">
-                    <h3 style="margin:0; font-size:1.5rem; color:var(--royal-blue);">${a.id}</h3>
-                    <div style="font-size:0.85rem; color:var(--text-sub); margin:8px 0;">
-                        Peso: <b>${a.lastWeight}kg</b> • <b>${a.gender}</b>
-                    </div>
-                    <button class="btn-informe" onclick="showModal('info', '${a.id}')">VER EXPEDIENTE</button>
-                </div>
-                <div class="status-pill">${a.lastStatus.toUpperCase()}</div>
-            </div>
-        `).join('');
-
-        document.getElementById('k-total').innerText = db.length;
-        document.getElementById('k-avg').innerText = db.length ? (db.reduce((s,a)=>s+a.lastWeight,0)/db.length).toFixed(1) : 0;
-        document.getElementById('k-crit').innerText = db.filter(a=>a.lastStatus==='Crítico').length;
-    }
-
-    setInterval(() => {
-        const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12:true});
-    }, 1000);
-
-    window.onload = render;
+    });
 </script>
 </body>
 </html>
