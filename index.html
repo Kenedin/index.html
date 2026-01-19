@@ -1,324 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Fenix Group | Registro</title>
-    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FenixGroup">
+    <meta name="apple-mobile-web-app-title" content="Fenix Group">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <link rel="apple-touch-icon" href="https://via.placeholder.com/180/059669/ffffff?text=F">
-    
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Fenix%20Group%22,%22short_name%22:%22Fenix%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22#fdfdfd%22,%22theme_color%22:%22#059669%22}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Fenix Group 🔥</title>
 
+    <link rel="apple-touch-icon" href="https://via.placeholder.com/180/059669/ffffff?text=F">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --brand: #059669;
-            --brand-soft: #ecfdf5;
-            --surface: #ffffff;
             --background: #fdfdfd;
             --text-main: #0f172a;
-            --text-sub: #64748b;
-            --border: #f1f5f9;
-            --danger: #ef4444;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--background); 
-            color: var(--text-main); 
-            margin: 0; padding: 0;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            margin: 0; 
+            padding-top: env(safe-area-inset-top); /* Evita que el contenido choque con la hora del iPhone */
         }
 
-        /* HEADER ESTILO FENIX GROUP */
         nav { 
-            background: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(10px);
-            padding: calc(1rem + env(safe-area-inset-top)) 1.5rem 1rem; 
-            border-bottom: 1px solid var(--border); 
-            display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; z-index: 100; 
+            background: white; 
+            padding: 1.2rem 1.5rem; 
+            border-bottom: 1px solid #f1f5f9; 
+            display: flex; align-items: center; gap: 12px;
         }
 
-        .logo-group { display: flex; align-items: center; gap: 12px; }
         .logo-box { 
-            width: 45px; height: 45px; background: var(--brand);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            color: white; font-weight: 800; cursor: pointer; overflow: hidden;
-        }
-        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        .container { max-width: 600px; margin: 0 auto; padding: 1.5rem; padding-bottom: 100px; }
-
-        /* BUSCADOR */
-        .search-container { position: relative; margin-bottom: 2rem; }
-        .search-input {
-            width: 100%; padding: 1rem 1rem 1rem 3rem; border: 1px solid var(--border);
-            border-radius: 16px; font-size: 1rem; background: var(--surface);
-            box-shadow: var(--shadow); outline: none; box-sizing: border-box;
+            width: 42px; height: 42px; background: var(--brand); 
+            border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; color: white; font-weight: 800; 
         }
 
-        /* DASHBOARD */
-        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
-        .kpi-card { 
-            background: var(--surface); padding: 1.2rem 0.5rem; border-radius: 20px; 
-            border: 1px solid var(--border); text-align: center; box-shadow: var(--shadow);
-        }
-        .kpi-label { font-size: 0.65rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; margin-bottom: 5px; display: block; }
-        .kpi-val { font-size: 1.3rem; font-weight: 800; }
-
-        /* LISTADO */
-        .pig-card { 
-            background: var(--surface); border-radius: 22px; padding: 1.2rem; 
-            margin-bottom: 1rem; border: 1px solid var(--border); box-shadow: var(--shadow);
-        }
-        .status-pill { padding: 0.3rem 0.7rem; border-radius: 10px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; }
-        .status-Sano { background: #ecfdf5; color: #065f46; }
-        .status-Tratamiento { background: #fffbeb; color: #92400e; }
-        .status-Critico { background: #fef2f2; color: #991b1b; }
-
-        .action-row { display: flex; gap: 8px; margin-top: 1rem; }
-        .btn { border-radius: 12px; font-weight: 700; font-size: 0.8rem; cursor: pointer; border: none; padding: 0.8rem; transition: 0.2s; }
-        .btn-primary { background: var(--text-main); color: white; flex: 1; }
-        .btn-icon { background: var(--brand-soft); color: var(--brand); width: 45px; }
-
-        /* PANELES FULLSCREEN */
-        .full-panel { 
-            display: none; position: fixed; inset: 0; background: var(--background); 
-            z-index: 200; overflow-y: auto; padding: calc(2rem + env(safe-area-inset-top)) 1.5rem; 
-        }
-        .panel-inner { max-width: 500px; margin: 0 auto; }
-
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--text-sub); margin-bottom: 0.5rem; }
-        .form-control { width: 100%; padding: 1rem; border-radius: 14px; border: 1px solid var(--border); background: #f8fafc; box-sizing: border-box; font-family: inherit; font-size: 1rem; }
-
-        /* BOTÓN FLOTANTE */
-        .fab { 
-            position: fixed; bottom: calc(2rem + env(safe-area-inset-bottom)); right: 1.5rem; 
-            width: 65px; height: 65px; background: var(--brand); color: white; 
-            border-radius: 20px; display: flex; align-items: center; justify-content: center; 
-            font-size: 1.8rem; border: none; box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4); z-index: 150; 
+        .container { padding: 1.5rem; text-align: center; }
+        
+        .card { 
+            background: white; border-radius: 20px; padding: 2rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
         }
 
-        .animate { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-plus {
+            position: fixed; bottom: 30px; right: 20px;
+            width: 60px; height: 60px; background: var(--brand);
+            color: white; border-radius: 20px; border: none;
+            font-size: 24px; box-shadow: 0 10px 20px rgba(5,150,105,0.3);
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo-group">
-        <input type="file" id="logo-input" hidden accept="image/*" onchange="LogoManager.update(this)">
-        <div class="logo-box" id="logo-display" onclick="document.getElementById('logo-input').click()">
-            <span id="logo-placeholder">P</span>
-        </div>
-        <div>
-            <div style="font-weight: 800; font-size: 1.1rem; line-height: 1;">Fenix Group 🔥</div>
-            <div style="font-size: 0.7rem; color: var(--text-sub); font-weight: 600;">Registro de Cerdos</div>
-        </div>
+    <div class="logo-box">F</div>
+    <div>
+        <div style="font-weight: 800; font-size: 1.1rem;">Fenix Group 🔥</div>
+        <div style="font-size: 0.7rem; color: #64748b;">MODO APP ACTIVO</div>
     </div>
-    <div id="clock" style="font-size: 0.8rem; color: var(--text-sub); font-weight: 600;"></div>
 </nav>
 
 <div class="container">
-    <div class="search-container">
-        <span style="position: absolute; left: 1.2rem; top: 1rem; opacity: 0.3;">🔍</span>
-        <input type="text" id="live-search" class="search-input" placeholder="Filtrar por ID..." onkeyup="MasterControl.render()">
-    </div>
-
-    <div class="kpi-grid">
-        <div class="kpi-card"><span class="kpi-label">Población</span><div class="kpi-val" id="kpi-pop">0</div></div>
-        <div class="kpi-card"><span class="kpi-label">Media kg</span><div class="kpi-val" id="kpi-weight">0</div></div>
-        <div class="kpi-card"><span class="kpi-label">Críticos</span><div class="kpi-val" id="kpi-health" style="color: var(--danger);">0</div></div>
-    </div>
-
-    <div id="master-list"></div>
-</div>
-
-<button class="fab" onclick="MasterControl.togglePanel('register-panel', true)">+</button>
-
-<div id="register-panel" class="full-panel">
-    <div class="panel-inner">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-            <h2 id="form-title" style="margin:0">Nuevo Registro</h2>
-            <button onclick="MasterControl.togglePanel('register-panel', false)" style="border:none; background:#eee; padding:8px 15px; border-radius:10px; font-weight:800; cursor:pointer;">CERRAR</button>
-        </div>
-        <div class="form-group"><label>IDENTIFICADOR</label><input type="text" id="id_pig" class="form-control" placeholder="Ej: Lote-01"></div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-            <div class="form-group"><label>GÉNERO</label><select id="gender" class="form-control"><option>Macho</option><option>Hembra</option></select></div>
-            <div class="form-group"><label>FECHA</label><input type="date" id="date" class="form-control"></div>
-        </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-            <div class="form-group"><label>PESO ACTUAL (KG)</label><input type="number" id="weight" step="0.01" class="form-control"></div>
-            <div class="form-group"><label>ESTADO DE SALUD</label><select id="status" class="form-control"><option>Sano</option><option>Tratamiento</option><option>Critico</option></select></div>
-        </div>
-        <button class="btn btn-primary" style="width:100%; padding:1.2rem; margin-top:1rem; font-size:1rem;" onclick="MasterControl.handleSave()">GUARDAR EJEMPLAR</button>
+    <div class="card">
+        <h2 style="margin-bottom: 10px;">¡Casi listo!</h2>
+        <p style="font-size: 0.9rem; color: #64748b;">Si ves la barra de Safari abajo, borra el icono viejo de tu pantalla y vuelve a darle a <b>"Agregar a inicio"</b> con este nuevo código.</p>
     </div>
 </div>
 
-<div id="report-panel" class="full-panel">
-    <div class="panel-inner">
-        <h2 id="report-id" style="margin-bottom:1.5rem">---</h2>
-        <div style="background:var(--brand-soft); padding:1.5rem; border-radius:20px; margin-bottom:1.5rem; display:flex; justify-content:space-between;">
-            <div><span class="kpi-label">GDP Diaria</span><div id="report-gdp" style="font-weight:800; color:var(--brand); font-size:1.2rem;">0.0</div></div>
-            <div style="text-align:right;"><span class="kpi-label">Ganancia Total</span><div id="report-total-gain" style="font-weight:800; font-size:1.2rem;">+0.0</div></div>
-        </div>
-        <div id="report-history-body"></div>
-        <button class="btn btn-primary" style="width:100%; margin-top:2rem;" onclick="MasterControl.togglePanel('report-panel', false)">VOLVER AL LISTADO</button>
-    </div>
-</div>
+<button class="btn-plus">+</button>
 
 <script>
-    const LogoManager = {
-        update(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    localStorage.setItem('pigs_logo', e.target.result);
-                    this.apply(e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        },
-        apply(src) {
-            const display = document.getElementById('logo-display');
-            if (src) display.innerHTML = `<img src="${src}" alt="Logo">`;
-        },
-        init() {
-            const saved = localStorage.getItem('pigs_logo');
-            if (saved) this.apply(saved);
-        }
-    };
-
-    const MasterControl = {
-        data: JSON.parse(localStorage.getItem('pigs_db')) || [],
-        editingIndex: null,
-
-        togglePanel(id, show) {
-            document.getElementById(id).style.display = show ? 'block' : 'none';
-            document.body.style.overflow = show ? 'hidden' : 'auto';
-            if(!show) this.reset();
-        },
-
-        handleSave() {
-            const fields = {
-                id: document.getElementById('id_pig').value,
-                gender: document.getElementById('gender').value,
-                date: document.getElementById('date').value,
-                weight: parseFloat(document.getElementById('weight').value),
-                status: document.getElementById('status').value
-            };
-            if (!fields.id || isNaN(fields.weight)) return alert("Datos incompletos");
-
-            if (this.editingIndex !== null) {
-                this.data[this.editingIndex].id = fields.id;
-                this.data[this.editingIndex].history.push({...fields});
-            } else {
-                this.data.unshift({ id: fields.id, gender: fields.gender, history: [{...fields}] });
-            }
-            localStorage.setItem('pigs_db', JSON.stringify(this.data));
-            this.togglePanel('register-panel', false);
-            this.render();
-            this.updateKPIs();
-        },
-
-        openReport(index) {
-            const pig = this.data[index];
-            const history = pig.history;
-            const last = history[history.length - 1];
-            const first = history[0];
-            const days = Math.max(1, (new Date(last.date) - new Date(first.date)) / (1000 * 60 * 60 * 24));
-            const gdp = (last.weight - first.weight) / days;
-
-            document.getElementById('report-id').innerText = "Expediente: " + pig.id;
-            document.getElementById('report-gdp').innerText = gdp.toFixed(3) + " kg";
-            document.getElementById('report-total-gain').innerText = "+" + (last.weight - first.weight).toFixed(1) + " kg";
-            
-            document.getElementById('report-history-body').innerHTML = history.slice().reverse().map(h => `
-                <div style="display:flex; justify-content:space-between; padding:1rem 0; border-bottom:1px solid var(--border);">
-                    <div><div style="font-weight:800;">${h.weight} kg</div><div style="font-size:0.7rem; color:var(--text-sub);">${h.date}</div></div>
-                    <span class="status-pill status-${h.status}">${h.status}</span>
-                </div>
-            `).join('');
-            this.togglePanel('report-panel', true);
-        },
-
-        edit(index) {
-            this.editingIndex = index;
-            const pig = this.data[index];
-            const last = pig.history[pig.history.length-1];
-            document.getElementById('id_pig').value = pig.id;
-            document.getElementById('weight').value = last.weight;
-            document.getElementById('status').value = last.status;
-            document.getElementById('form-title').innerText = "Editar Registro";
-            this.togglePanel('register-panel', true);
-        },
-
-        delete(index) { if(confirm("¿Eliminar ejemplar?")) { this.data.splice(index,1); localStorage.setItem('pigs_db', JSON.stringify(this.data)); this.render(); this.updateKPIs(); } },
-        reset() {
-            this.editingIndex = null;
-            document.getElementById('id_pig').value = ""; document.getElementById('weight').value = "";
-            document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        },
-
-        updateKPIs() {
-            const total = this.data.length;
-            const weightSum = this.data.reduce((acc, p) => acc + p.history[p.history.length-1].weight, 0);
-            document.getElementById('kpi-pop').innerText = total;
-            document.getElementById('kpi-weight').innerText = total ? (weightSum/total).toFixed(1) : 0;
-            document.getElementById('kpi-health').innerText = this.data.filter(p => p.history[p.history.length-1].status !== 'Sano').length;
-        },
-
-        render() {
-            const search = document.getElementById('live-search').value.toLowerCase();
-            const list = document.getElementById('master-list');
-            list.innerHTML = this.data.filter(p => p.id.toLowerCase().includes(search)).map((pig, i) => {
-                const last = pig.history[pig.history.length-1];
-                const idx = this.data.indexOf(pig);
-                return `
-                    <div class="pig-card animate">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div style="font-weight:800; font-size:1.1rem;">${pig.id}</div>
-                            <span class="status-pill status-${last.status}">${last.status}</span>
-                        </div>
-                        <div style="font-size:0.85rem; color:var(--text-sub); margin:10px 0;">Peso: <b>${last.weight}kg</b> • Sexo: ${pig.gender}</div>
-                        <div class="action-row">
-                            <button class="btn btn-primary" onclick="MasterControl.openReport(${idx})">INFORME</button>
-                            <button class="btn btn-icon" onclick="MasterControl.edit(${idx})">✎</button>
-                            <button class="btn btn-icon" style="color:var(--danger)" onclick="MasterControl.delete(${idx})">🗑</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-    };
-
-    window.onload = () => {
-        document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        setInterval(() => document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}), 1000);
-        LogoManager.init(); MasterControl.updateKPIs(); MasterControl.render();
-    };
-
-    // Script para evitar que iOS abra Safari al tocar enlaces internos
-    if(("standalone" in window.navigator) && window.navigator.standalone){
-        var noddy, remotes = false;
-        document.addEventListener('click', function(event) {
-            noddy = event.target;
-            while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") noddy = noddy.parentNode;
-            if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(window.location.host) !== -1 || remotes)){
-                event.preventDefault();
-                window.location.copy = noddy.href;
-            }
-        }, false);
+    // Este script detecta si ya estás dentro de la App y oculta cosas si es necesario
+    if (window.navigator.standalone === true) {
+        console.log("Ejecutando como App independiente");
     }
 </script>
 </body>
